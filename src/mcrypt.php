@@ -618,11 +618,13 @@ function mcrypt_get_cipher_name($cipher)
         'skipjack' => false,
     );
 
-    if (!in_array($cipher, array_values($names))) {
-        return false;
+    if (isset($names[$cypher]) && $names[$cypher]) {
+        return $names[$cypher];
     }
 
-    return $names[$cipher];
+    trigger_error('mcrypt_get_cipher_name(): Module initialization failed', E_USER_WARNING);
+
+    return false;
 }
 
 /**
